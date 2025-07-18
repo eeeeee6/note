@@ -3,7 +3,7 @@ import { db, storage, auth } from "./firebase";
 import { ref, push, set } from "firebase/database";
 import { ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const DiaryForm = () => {
+const DiaryForm = ({ userProfile }) => {
   const [gratitude, setGratitude] = useState(["", "", ""]);
   const [stars, setStars] = useState(0);
   const [photo, setPhoto] = useState(null);
@@ -59,6 +59,13 @@ const DiaryForm = () => {
 
   return (
     <div className="diary-form">
+      {/* 顯示登入者暱稱與 email */}
+      {userProfile && (
+        <div style={{ marginBottom: 12, textAlign: 'center', color: '#888' }}>
+          <div>暱稱：{userProfile.nickname}</div>
+          <div>Email：{userProfile.email}</div>
+        </div>
+      )}
       <h2>新增感恩日記</h2>
       <form onSubmit={handleSubmit}>
         {[0, 1, 2].map((idx) => (

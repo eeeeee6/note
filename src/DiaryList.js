@@ -15,6 +15,8 @@ const DiaryList = ({ onlyMine = false }) => {
           id,
           ...value,
         }));
+        // 依 createdAt 由新到舊排序
+        diaryArray.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
         setDiaries(diaryArray);
       } else {
         setDiaries([]);

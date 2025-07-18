@@ -59,14 +59,13 @@ const DiaryForm = ({ userProfile }) => {
 
   return (
     <div className="diary-form">
-      {/* 顯示登入者暱稱與 email */}
+      {/* 只顯示暱稱，不顯示 email */}
       {userProfile && (
         <div style={{ marginBottom: 12, textAlign: 'center', color: '#888' }}>
           <div>暱稱：{userProfile.nickname}</div>
-          <div>Email：{userProfile.email}</div>
         </div>
       )}
-      <h2>新增感恩日記</h2>
+      <h2>新增今日之美</h2>
       <form onSubmit={handleSubmit}>
         {[0, 1, 2].map((idx) => (
           <div key={idx} style={{ marginBottom: 12 }}>

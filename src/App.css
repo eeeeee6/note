@@ -1,13 +1,177 @@
-import React from "react";
-import Auth from "./Auth";
-import './App.css';
-
-function App() {
-  return (
-    <div className="app-container" style={{ background: '#f5f6fa', minHeight: '100vh' }}>
-      <Auth />
-    </div>
-  );
+body {
+  background: #f5f6fa;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-export default App;
+.app-container {
+  max-width: 420px;
+  margin: 40px auto 0 auto;
+  padding: 0 8px 40px 8px;
+}
+
+.diary-form, .diary-list {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px #0002;
+  margin-bottom: 32px;
+  padding: 28px 20px 20px 20px;
+}
+
+.diary-form h2, .diary-list-title {
+  text-align: center;
+  margin-bottom: 18px;
+  color: #2d3a4b;
+  letter-spacing: 2px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+hr {
+  border: none;
+  border-top: 1.5px solid #e0e0e0;
+  margin: 24px 0 18px 0;
+}
+
+.diary-form input[type="text"] {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 4px;
+  transition: border 0.2s;
+  background: #f8fafc;
+}
+.diary-form input[type="text"]:focus {
+  border: 1.5px solid #7b9acc;
+  outline: none;
+}
+
+.diary-form label {
+  font-weight: bold;
+  color: #555;
+}
+
+.diary-form button[type="submit"] {
+  background: linear-gradient(90deg, #7b9acc 0%, #4e6eaa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  padding: 10px 0;
+  margin-top: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+  box-shadow: 0 1px 4px #0001;
+}
+.diary-form button[type="submit"]:hover {
+  background: linear-gradient(90deg, #4e6eaa 0%, #7b9acc 100%);
+}
+
+.diary-form span[role="button"] {
+  margin-right: 2px;
+  transition: transform 0.1s;
+}
+.diary-form span[role="button"]:hover {
+  transform: scale(1.2);
+}
+
+.diary-list-horizontal {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 18px 0 8px 0;
+  scroll-snap-type: x mandatory;
+}
+.diary-list-horizontal > .diary-card {
+  min-width: 320px;
+  max-width: 340px;
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+  margin-bottom: 0;
+}
+
+.diary-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #0001;
+  padding: 16px 14px 12px 14px;
+  margin-bottom: 18px;
+  border-left: 4px solid #7b9acc;
+  position: relative;
+  transition: box-shadow 0.2s;
+  border: 1.5px solid #e0e0e0;
+  min-height: 260px;
+}
+.diary-card:hover {
+  box-shadow: 0 4px 24px #7b9acc22;
+}
+
+.diary-card h3 {
+  font-size: 17px;
+  color: #4e6eaa;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.diary-card img {
+  display: block;
+  margin: 10px 0;
+  border-radius: 6px;
+  max-width: 100%;
+  box-shadow: 0 1px 6px #0001;
+}
+
+.diary-card p {
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.diary-card > div {
+  margin-bottom: 4px;
+}
+
+.delete-btn {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  background: #fff;
+  color: #7c5c27;
+  border: 1px solid #d6c7a1;
+  border-radius: 6px;
+  padding: 3px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  display: inline-block;
+  margin: 0;
+  font-weight: bold;
+}
+.delete-btn:hover {
+  background: #e0e0e0;
+  color: #5a431a;
+  border: 1px solid #b8a36d;
+}
+
+@media (max-width: 600px) {
+  .app-container {
+    max-width: 98vw;
+    padding: 0 2vw 40px 2vw;
+  }
+  .diary-form, .diary-list {
+    padding: 18px 4vw 16px 4vw;
+  }
+  .diary-list-horizontal {
+    gap: 8px;
+    padding: 8px 0 8px 0;
+  }
+  .diary-list-horizontal > .diary-card {
+    min-width: 90vw;
+    max-width: 95vw;
+    flex: 0 0 90vw;
+  }
+}

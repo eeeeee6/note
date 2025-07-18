@@ -1,13 +1,8 @@
-import React from "react";
-import Auth from "./Auth";
-import './App.css';
-
-function App() {
-  return (
-    <div className="app-container" style={{ background: '#f5f6fa', minHeight: '100vh' }}>
-      <Auth />
-    </div>
-  );
+body {
+  background: #f5f6fa;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-export default App;
+/* 其他 CSS ... */

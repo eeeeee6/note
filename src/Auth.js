@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { auth } from "./firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import DiaryForm from "./DiaryForm";
+import DiaryList from "./DiaryList";
 
 const Auth = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -47,6 +48,9 @@ const Auth = () => {
         <h2>歡迎，{user.email}！</h2>
         <button onClick={handleSignOut}>登出</button>
         <DiaryForm />
+        <hr />
+        <div className="diary-list-title">美好記錄</div>
+        <DiaryList onlyMine={true} />
       </div>
     );
   }

@@ -7,6 +7,8 @@ const DiaryList = ({ onlyMine = false }) => {
   const [loading, setLoading] = useState(true);
   // 新增：每則日記的照片索引
   const [photoIndexes, setPhotoIndexes] = useState({});
+  // 新增：大圖預覽狀態
+  const [previewImg, setPreviewImg] = useState(null);
 
   useEffect(() => {
     const diariesRef = ref(db, "diaries");
@@ -106,8 +108,10 @@ const DiaryList = ({ onlyMine = false }) => {
                           boxShadow: '0 1px 6px #0001',
                           objectFit: 'cover',
                           display: 'block',
-                          margin: '0 auto'
+                          margin: '0 auto',
+                          cursor: 'pointer'
                         }}
+                        onClick={() => setPreviewImg(photos[currentIdx])}
                       />
                       {/* 左右切換按鈕 */}
                       {photos.length > 1 && (
@@ -186,6 +190,52 @@ const DiaryList = ({ onlyMine = false }) => {
             })}
           </div>
         </>
+      )}
+      {/* Modal 大圖預覽 */}
+      {previewImg && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(0,0,0,0.7)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+          onClick={() => setPreviewImg(null)}
+        >
+          <img
+            src={previewImg}
+            alt="預覽大圖"
+            style={{
+              maxWidth: '90vw',
+              maxHeight: '80vh',
+              borderRadius: 12,
+              boxShadow: '0 4px 32px #0008',
+              background: '#fff',
+              padding: 8
+            }}
+            onClick={e => e.stopPropagation()}
+          />
+          <button
+            onClick={() => setPreviewImg(null)}
+            style={{
+              position: 'fixed',
+              top: 24,
+              right: 32,
+              fontSize: 32,
+              color: '#fff',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              zIndex: 10000
+            }}
+            aria-label="關閉預覽"
+          >×</button>
+        </div>
       )}
     </div>
   );

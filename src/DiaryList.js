@@ -74,7 +74,26 @@ const DiaryList = ({ onlyMine = false }) => {
                   <strong>美好時光：</strong>
                   <span>{diary.photoDesc}</span>
                 </div>
-                {diary.photoURL && (
+                {diary.photoURLs && diary.photoURLs.length > 0 && (
+                  <div style={{ marginTop: 10 }}>
+                    {diary.photoURLs.map((photoURL, index) => (
+                      <img 
+                        key={index}
+                        src={photoURL} 
+                        alt={`日記照片 ${index + 1}`} 
+                        style={{ 
+                          maxWidth: 200, 
+                          marginRight: 8, 
+                          marginBottom: 8,
+                          borderRadius: 6,
+                          boxShadow: '0 1px 6px #0001'
+                        }} 
+                      />
+                    ))}
+                  </div>
+                )}
+                {/* 支援舊版單張照片格式 */}
+                {diary.photoURL && !diary.photoURLs && (
                   <img src={diary.photoURL} alt="日記照片" style={{ maxWidth: 200 }} />
                 )}
                 <div>心情：{Array(diary.stars).fill('⭐️').join('')}</div>

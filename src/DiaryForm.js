@@ -6,7 +6,7 @@ import { ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage
 const DiaryForm = ({ userProfile }) => {
   const [gratitude, setGratitude] = useState(["", "", ""]);
   const [stars, setStars] = useState(0);
-  const [photo, setPhoto] = useState(null);
+  const [photos, setPhotos] = useState([]);
   const [photoDesc, setPhotoDesc] = useState("");
   const [uploading, setUploading] = useState(false);
   const [success, setSuccess] = useState("");
@@ -19,8 +19,8 @@ const DiaryForm = ({ userProfile }) => {
   };
 
   const handlePhotoChange = (e) => {
-    if (e.target.files[0]) {
-      setPhoto(e.target.files[0]);
+    if (e.target.files) {
+      setPhotos(Array.from(e.target.files));
     }
   };
 
@@ -29,26 +29,33 @@ const DiaryForm = ({ userProfile }) => {
     setUploading(true);
     setError("");
     setSuccess("");
-    let photoURL = "";
+    let photoURLs = [];
+    
     try {
-      if (photo) {
-        const fileRef = storageRef(storage, `diary_photos/${auth.currentUser.uid}_${Date.now()}_${photo.name}`);
-        await uploadBytes(fileRef, photo);
-        photoURL = await getDownloadURL(fileRef);
+      // 上傳多張照片
+      if (photos.length > 0) {
+        for (let i = 0; i < photos.length; i++) {
+          const photo = photos[i];
+          const fileRef = storageRef(storage, `diary_photos/${auth.currentUser.uid}_${Date.now()}_${i}_${photo.name}`);
+          await uploadBytes(fileRef, photo);
+          const photoURL = await getDownloadURL(fileRef);
+          photoURLs.push(photoURL);
+        }
       }
+      
       const newPostRef = push(ref(db, "diaries"));
       await set(newPostRef, {
         userId: auth.currentUser.uid,
         gratitude,
         stars,
-        photoURL,
+        photoURLs, // 改為 photoURLs 陣列
         photoDesc,
         createdAt: Date.now(),
       });
       setSuccess("日記已成功儲存！");
       setGratitude(["", "", ""]);
       setStars(0);
-      setPhoto(null);
+      setPhotos([]);
       setPhotoDesc("");
     } catch (err) {
       setError("日記內容儲存失敗: " + err.message);
@@ -98,10 +105,11 @@ const DiaryForm = ({ userProfile }) => {
           </div>
         </div>
         <div style={{ marginBottom: 12 }}>
-          <label>上傳照片：</label>
+          <label>上傳照片（可多選）：</label>
           <input 
             type="file" 
             accept="image/*" 
+            multiple
             onChange={handlePhotoChange} 
             style={{ 
               width: "100%", 
@@ -112,11 +120,16 @@ const DiaryForm = ({ userProfile }) => {
               cursor: "pointer"
             }}
           />
+          {photos.length > 0 && (
+            <div style={{ marginTop: 8, fontSize: '14px', color: '#666' }}>
+              已選擇 {photos.length} 張照片
+            </div>
+          )}
         </div>
         <div style={{ marginBottom: 12 }}>
           <label>美好時光內容：</label>
           <textarea
-            placeholder="請描述這張照片的美好時光內容（可選填）"
+            placeholder="請描述這些照片的美好時光內容（可選填）"
             value={photoDesc}
             onChange={e => setPhotoDesc(e.target.value)}
             style={{ 

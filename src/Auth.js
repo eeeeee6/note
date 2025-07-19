@@ -130,6 +130,9 @@ const Auth = () => {
 
   return (
     <div style={{ maxWidth: 400, margin: "40px auto", padding: 24, border: "1px solid #ccc", borderRadius: 8 }}>
+      <div style={{ textAlign: 'center', marginBottom: 24 }}>
+        <span style={{ fontSize: 28, fontWeight: 'bold', color: '#2979ff', letterSpacing: 2 }}>今好 Station</span>
+      </div>
       {/* Tab 切換 */}
       <div style={{ display: 'flex', marginBottom: 24 }}>
         <button

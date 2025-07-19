@@ -35,6 +35,7 @@ export default function LoginScreen({ onLogin }) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.appTitle}>今好 Station</Text>
       <View style={styles.tabRow}>
         <TouchableOpacity
           style={[styles.tab, !isRegister && styles.tabActive]}
@@ -86,6 +87,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 24,
     backgroundColor: '#f5f6fa', // 淺色背景
+  },
+  appTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#2979ff',
+    textAlign: 'center',
+    marginBottom: 32,
+    letterSpacing: 2,
   },
   tabRow: { flexDirection: 'row', marginBottom: 24 },
   tab: { flex: 1, padding: 12, alignItems: 'center', borderBottomWidth: 2, borderColor: '#eee' },

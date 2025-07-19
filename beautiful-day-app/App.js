@@ -68,8 +68,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="DiaryDetail" component={DiaryDetail} options={{ title: '日記詳細' }} />
+        <Stack.Screen name="Main" component={MainScreen} options={{ title: '今好 Station' }} />
+        <Stack.Screen name="DiaryDetail" component={DiaryDetail} options={{ title: '返回' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

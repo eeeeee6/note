@@ -71,8 +71,12 @@ export default function DiaryForm() {
       {[0, 1, 2].map(idx => (
         <TextInput
           key={idx}
-          style={styles.input}
+          style={[
+            styles.input,
+            !gratitude[idx] ? styles.inputPlaceholder : null
+          ]}
           placeholder={`讓我微笑 ${idx + 1}`}
+          placeholderTextColor="#aaa"
           value={gratitude[idx]}
           onChangeText={text => {
             const newArr = [...gratitude];
@@ -89,7 +93,10 @@ export default function DiaryForm() {
           </TouchableOpacity>
         ))}
       </View>
-      <Button title="捕捉美好一刻" onPress={pickImages} />
+      <Text style={styles.uploadTitle}>上傳照片（可多選）</Text>
+      <TouchableOpacity style={styles.uploadBtn} onPress={pickImages}>
+        <Text style={styles.uploadBtnText}>上傳照片</Text>
+      </TouchableOpacity>
       <ScrollView horizontal style={{ marginVertical: 8 }}>
         {photos.map((photo, idx) => (
           <Image
@@ -109,7 +116,9 @@ export default function DiaryForm() {
       {uploading ? (
         <ActivityIndicator size="large" style={{ marginVertical: 16 }} />
       ) : (
-        <Button title="儲存日記" onPress={handleSubmit} />
+        <TouchableOpacity style={styles.saveBtn} onPress={handleSubmit}>
+          <Text style={styles.saveBtnText}>儲存日記</Text>
+        </TouchableOpacity>
       )}
     </ScrollView>
   );
@@ -117,7 +126,61 @@ export default function DiaryForm() {
 
 const styles = StyleSheet.create({
   container: { padding: 24, backgroundColor: '#fff', flexGrow: 1 },
-  title: { fontSize: 22, fontWeight: 'bold', color: '#2d3a4b', textAlign: 'center', marginBottom: 18 },
-  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 8, padding: 12, marginBottom: 12, fontSize: 16 },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#2d3a4b',
+    textAlign: 'center',
+    marginBottom: 18,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+    fontSize: 16,
+    color: '#222', // 深色文字
+    backgroundColor: '#fff',
+  },
+  inputPlaceholder: {
+    color: '#aaa', // 灰色文字
+  },
   starsRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
+  uploadTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#2d3a4b',
+    textAlign: 'center',
+    marginBottom: 18,
+    marginTop: 8,
+  },
+  uploadBtn: {
+    borderWidth: 2,
+    borderColor: '#2979ff',
+    borderRadius: 8,
+    paddingVertical: 14,
+    alignItems: 'center',
+    marginBottom: 8,
+    backgroundColor: '#fff',
+  },
+  uploadBtnText: {
+    color: '#2979ff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    letterSpacing: 2,
+  },
+  saveBtn: {
+    backgroundColor: '#2979ff',
+    borderRadius: 8,
+    paddingVertical: 14,
+    alignItems: 'center',
+    marginTop: 12,
+  },
+  saveBtnText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    letterSpacing: 2,
+  },
 });

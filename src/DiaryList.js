@@ -47,20 +47,21 @@ const DiaryList = ({ onlyMine = false }) => {
       ) : (
         filteredDiaries.map((diary) => (
           <div className="diary-card" key={diary.id}>
-            <h3>
-              {Array.isArray(diary.gratitude)
-                ? diary.gratitude.filter(Boolean).map((g, i) => <div key={i}>• {g}</div>)
-                : diary.gratitude}
-            </h3>
-            <p>{diary.photoDesc}</p>
+            <h3>今日之美</h3>
+            {Array.isArray(diary.gratitude)
+              ? diary.gratitude.filter(Boolean).map((g, i) => <div key={i}>• {g}</div>)
+              : diary.gratitude}
+            <div style={{ marginTop: 10 }}>
+              <strong>美好時光：</strong>
+              <span>{diary.photoDesc}</span>
+            </div>
             {diary.photoURL && (
               <img src={diary.photoURL} alt="日記照片" style={{ maxWidth: 200 }} />
             )}
-            <div>心情：{Array(diary.stars).fill('★').join('')}</div>
+            <div>心情：{Array(diary.stars).fill('⭐️').join('')}</div>
             <div style={{ fontSize: 12, color: "#888" }}>
               {diary.createdAt ? new Date(diary.createdAt).toLocaleString() : ""}
             </div>
-            {/* 只有自己的日記才顯示刪除按鈕，並放在最下方 */}
             {auth.currentUser?.uid === diary.userId && (
               <button className="delete-btn" onClick={() => handleDelete(diary.id)}>
                 刪除

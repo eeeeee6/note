@@ -54,7 +54,7 @@ const DiaryList = ({ onlyMine = false }) => {
             borderRadius: '8px',
             textAlign: 'center'
           }}>
-            <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
+            <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>
               共有 {filteredDiaries.length} 則美好記錄
             </div>
             {filteredDiaries.length > 0 && (

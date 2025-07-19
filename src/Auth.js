@@ -81,8 +81,45 @@ const Auth = () => {
   }
 
   return (
-    <div style={{ maxWidth: 320, margin: "40px auto", padding: 24, border: "1px solid #ccc", borderRadius: 8 }}>
-      <h2>{isRegister ? "註冊帳號" : "登入"}</h2>
+    <div style={{ maxWidth: 400, margin: "40px auto", padding: 24, border: "1px solid #ccc", borderRadius: 8 }}>
+      {/* Tab 切換 */}
+      <div style={{ display: 'flex', marginBottom: 24 }}>
+        <button
+          onClick={() => setIsRegister(false)}
+          style={{
+            flex: 1,
+            padding: '12px',
+            border: 'none',
+            background: !isRegister ? '#7b9acc' : '#f0f0f0',
+            color: !isRegister ? 'white' : '#333',
+            cursor: 'pointer',
+            borderTopLeftRadius: '8px',
+            borderBottomLeftRadius: '8px',
+            fontSize: '16px',
+            fontWeight: 'bold'
+          }}
+        >
+          登入
+        </button>
+        <button
+          onClick={() => setIsRegister(true)}
+          style={{
+            flex: 1,
+            padding: '12px',
+            border: 'none',
+            background: isRegister ? '#7b9acc' : '#f0f0f0',
+            color: isRegister ? 'white' : '#333',
+            cursor: 'pointer',
+            borderTopRightRadius: '8px',
+            borderBottomRightRadius: '8px',
+            fontSize: '16px',
+            fontWeight: 'bold'
+          }}
+        >
+          註冊
+        </button>
+      </div>
+
       <form onSubmit={handleSubmit}>
         {isRegister && (
           <div style={{ marginBottom: 12 }}>
@@ -121,11 +158,6 @@ const Auth = () => {
           {isRegister ? "註冊" : "登入"}
         </button>
       </form>
-      <div style={{ marginTop: 16 }}>
-        <button onClick={() => setIsRegister(!isRegister)} style={{ width: "100%", padding: 8, background: "#eee" }}>
-          {isRegister ? "已有帳號？登入" : "沒有帳號？註冊"}
-        </button>
-      </div>
     </div>
   );
 };

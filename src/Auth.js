@@ -13,7 +13,7 @@ const Auth = () => {
   const [user, setUser] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
   const [error, setError] = useState("");
-  const [tab, setTab] = useState('list'); // ← 這裡移到最上層
+  const [tab, setTab] = useState('form'); // 預設顯示新增今日之美
 
   const handleSubmit = async (e) => {
     e.preventDefault();

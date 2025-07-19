@@ -2,8 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
-import { initializeAuth, getReactNativePersistence } from "firebase/auth";
-import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
+import { getAuth } from "firebase/auth"; // 只用 getAuth
 
 const firebaseConfig = {
   apiKey: "AIzaSyBqm7pyLbYBi9IXGosv6VQYKruv3odkUkw",
@@ -19,8 +18,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const storage = getStorage(app);
-const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
-});
+const auth = getAuth(app); // 直接用 getAuth
 
-export { app, db, auth, storage };
+export { app, db, storage, auth };

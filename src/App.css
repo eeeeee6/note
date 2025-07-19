@@ -11,12 +11,36 @@ body {
   padding: 0 8px 40px 8px;
 }
 
-.diary-form, .diary-list {
+/* DiaryForm RWD 與美化 */
+.diary-form {
+  box-sizing: border-box;
+  padding: 28px 20px 20px 20px;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 24px #0002;
   margin-bottom: 32px;
-  padding: 28px 20px 20px 20px;
+  max-width: 100%;
+}
+.diary-form input[type="text"],
+.diary-form textarea,
+.diary-form input[type="file"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 8px;
+}
+.diary-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.diary-form label {
+  font-weight: bold;
+  color: #555;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .diary-form h2, .diary-list-title {
@@ -34,40 +58,9 @@ hr {
   margin: 24px 0 18px 0;
 }
 
-.diary-form input[type="text"] {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 4px;
-  transition: border 0.2s;
-  background: #f8fafc;
-}
 .diary-form input[type="text"]:focus {
   border: 1.5px solid #7b9acc;
   outline: none;
-}
-
-.diary-form label {
-  font-weight: bold;
-  color: #555;
-}
-
-.diary-form button[type="submit"] {
-  background: linear-gradient(90deg, #7b9acc 0%, #4e6eaa 100%);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  padding: 10px 0;
-  margin-top: 8px;
-  cursor: pointer;
-  width: 100%;
-  transition: background 0.2s;
-  box-shadow: 0 1px 4px #0001;
-}
-.diary-form button[type="submit"]:hover {
-  background: linear-gradient(90deg, #4e6eaa 0%, #7b9acc 100%);
 }
 
 .diary-form span[role="button"] {
@@ -174,4 +167,38 @@ hr {
     max-width: 95vw;
     flex: 0 0 90vw;
   }
+}
+
+/* 登入/註冊頁面按鈕美化 */
+button[type="submit"],
+.diary-form button[type="submit"],
+.diary-form button,
+.diary-form input[type="button"] {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 18px;
+  border-radius: 10px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, #7b9acc 0%, #4e6eaa 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 1px 4px #0001;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button[type="submit"]:hover,
+.diary-form button[type="submit"]:hover,
+.diary-form button:hover,
+.diary-form input[type="button"]:hover {
+  background: linear-gradient(90deg, #4e6eaa 0%, #7b9acc 100%);
+}
+
+/* 登入/註冊頁面分頁按鈕美化 */
+/* 讓分頁按鈕也有圓角與高度 */
+button[style*="borderTopLeftRadius"],
+button[style*="borderTopRightRadius"] {
+  min-height: 48px;
+  font-size: 18px;
+  border-radius: 10px !important;
 }

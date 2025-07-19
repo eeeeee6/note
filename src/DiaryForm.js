@@ -99,15 +99,35 @@ const DiaryForm = ({ userProfile }) => {
         </div>
         <div style={{ marginBottom: 12 }}>
           <label>上傳照片：</label>
-          <input type="file" accept="image/*" onChange={handlePhotoChange} />
+          <input 
+            type="file" 
+            accept="image/*" 
+            onChange={handlePhotoChange} 
+            style={{ 
+              width: "100%", 
+              padding: "12px", 
+              fontSize: "16px",
+              border: "2px dashed #ccc",
+              borderRadius: "8px",
+              cursor: "pointer"
+            }}
+          />
         </div>
         <div style={{ marginBottom: 12 }}>
-          <input
-            type="text"
-            placeholder="照片的美好時光內容（可選填）"
+          <label>美好時光內容：</label>
+          <textarea
+            placeholder="請描述這張照片的美好時光內容（可選填）"
             value={photoDesc}
             onChange={e => setPhotoDesc(e.target.value)}
-            style={{ width: "100%", padding: 8 }}
+            style={{ 
+              width: "100%", 
+              padding: "12px", 
+              fontSize: "16px",
+              minHeight: "100px",
+              border: "1px solid #e0e0e0",
+              borderRadius: "8px",
+              resize: "vertical"
+            }}
           />
         </div>
         {error && <div style={{ color: "red", marginBottom: 12 }}>{error}</div>}

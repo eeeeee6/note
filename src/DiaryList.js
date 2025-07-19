@@ -56,7 +56,7 @@ const DiaryList = ({ onlyMine = false }) => {
             {diary.photoURL && (
               <img src={diary.photoURL} alt="日記照片" style={{ maxWidth: 200 }} />
             )}
-            <div>星星數：{diary.stars}</div>
+            <div>心情：{Array(diary.stars).fill('★').join('')}</div>
             <div style={{ fontSize: 12, color: "#888" }}>
               {diary.createdAt ? new Date(diary.createdAt).toLocaleString() : ""}
             </div>

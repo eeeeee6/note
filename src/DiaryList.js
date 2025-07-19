@@ -41,14 +41,13 @@ const DiaryList = ({ onlyMine = false }) => {
   if (loading) return <div>載入中...</div>;
 
   return (
-    <div className="diary-list-horizontal">
+    <div>
       {filteredDiaries.length === 0 ? (
         <div>沒有日記</div>
       ) : (
         <>
-          {/* 統計說明 */}
+          {/* 統計說明 - 放在標題下方，不參與橫向滾動 */}
           <div style={{ 
-            width: '100%', 
             padding: '16px', 
             marginBottom: '16px', 
             background: '#f8f9fa', 
@@ -60,34 +59,36 @@ const DiaryList = ({ onlyMine = false }) => {
             </div>
             {filteredDiaries.length > 0 && (
               <div style={{ fontSize: '14px', color: '#666' }}>
-                時間範圍：{new Date(Math.min(...filteredDiaries.map(d => d.createdAt || 0))).toLocaleDateString()} 至 {new Date(Math.max(...filteredDiaries.map(d => d.createdAt || 0))).toLocaleDateString()}
+                記錄期間：{new Date(Math.min(...filteredDiaries.map(d => d.createdAt || 0))).toLocaleDateString()} 至 {new Date(Math.max(...filteredDiaries.map(d => d.createdAt || 0))).toLocaleDateString()}
               </div>
             )}
           </div>
-          {filteredDiaries.map((diary) => (
-            <div className="diary-card" key={diary.id}>
-              <h3>今日之美</h3>
-              {Array.isArray(diary.gratitude)
-                ? diary.gratitude.filter(Boolean).map((g, i) => <div key={i}>• {g}</div>)
-                : diary.gratitude}
-              <div style={{ marginTop: 10 }}>
-                <strong>美好時光：</strong>
-                <span>{diary.photoDesc}</span>
+          <div className="diary-list-horizontal">
+            {filteredDiaries.map((diary) => (
+              <div className="diary-card" key={diary.id}>
+                <h3>今日之美</h3>
+                {Array.isArray(diary.gratitude)
+                  ? diary.gratitude.filter(Boolean).map((g, i) => <div key={i}>• {g}</div>)
+                  : diary.gratitude}
+                <div style={{ marginTop: 10 }}>
+                  <strong>美好時光：</strong>
+                  <span>{diary.photoDesc}</span>
+                </div>
+                {diary.photoURL && (
+                  <img src={diary.photoURL} alt="日記照片" style={{ maxWidth: 200 }} />
+                )}
+                <div>心情：{Array(diary.stars).fill('⭐️').join('')}</div>
+                <div style={{ fontSize: 12, color: "#888" }}>
+                  {diary.createdAt ? new Date(diary.createdAt).toLocaleString() : ""}
+                </div>
+                {auth.currentUser?.uid === diary.userId && (
+                  <button className="delete-btn" onClick={() => handleDelete(diary.id)}>
+                    刪除
+                  </button>
+                )}
               </div>
-              {diary.photoURL && (
-                <img src={diary.photoURL} alt="日記照片" style={{ maxWidth: 200 }} />
-              )}
-              <div>心情：{Array(diary.stars).fill('⭐️').join('')}</div>
-              <div style={{ fontSize: 12, color: "#888" }}>
-                {diary.createdAt ? new Date(diary.createdAt).toLocaleString() : ""}
-              </div>
-              {auth.currentUser?.uid === diary.userId && (
-                <button className="delete-btn" onClick={() => handleDelete(diary.id)}>
-                  刪除
-                </button>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </>
       )}
     </div>

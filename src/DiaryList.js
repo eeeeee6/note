@@ -75,16 +75,24 @@ const DiaryList = ({ onlyMine = false }) => {
                   <span>{diary.photoDesc}</span>
                 </div>
                 {diary.photoURLs && diary.photoURLs.length > 0 && (
-                  <div style={{ marginTop: 10 }}>
+                  <div style={{ 
+                    marginTop: 10,
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))',
+                    gap: '8px',
+                    maxWidth: '100%',
+                    maxHeight: '200px',
+                    overflow: 'hidden'
+                  }}>
                     {diary.photoURLs.map((photoURL, index) => (
                       <img 
                         key={index}
                         src={photoURL} 
                         alt={`日記照片 ${index + 1}`} 
                         style={{ 
-                          maxWidth: 200, 
-                          marginRight: 8, 
-                          marginBottom: 8,
+                          width: '100%',
+                          height: '80px',
+                          objectFit: 'cover',
                           borderRadius: 6,
                           boxShadow: '0 1px 6px #0001'
                         }} 

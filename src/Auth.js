@@ -67,15 +67,63 @@ const Auth = () => {
   }, []);
 
   if (user) {
+    // 分頁切換狀態
+    const [tab, setTab] = useState('list'); // 預設顯示美好記錄
     return (
       <div style={{ textAlign: "center", marginTop: 40 }}>
         <h2>歡迎，{userProfile?.nickname || "使用者"}！</h2>
         <div style={{ color: '#888', marginBottom: 8 }}>{userProfile?.email}</div>
         <button onClick={handleSignOut}>登出</button>
-        <DiaryForm userProfile={userProfile} />
-        <hr />
-        <div className="diary-list-title">美好記錄</div>
-        <DiaryList onlyMine={true} />
+        {/* 分頁 Tab */}
+        <div style={{ display: 'flex', margin: '32px 0 24px 0', justifyContent: 'center' }}>
+          <button
+            onClick={() => setTab('form')}
+            style={{
+              flex: 1,
+              maxWidth: 180,
+              padding: '12px',
+              border: 'none',
+              background: tab === 'form' ? '#7b9acc' : '#f0f0f0',
+              color: tab === 'form' ? 'white' : '#333',
+              cursor: 'pointer',
+              borderTopLeftRadius: '8px',
+              borderBottomLeftRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              transition: 'background 0.2s, color 0.2s'
+            }}
+          >
+            新增今日之美
+          </button>
+          <button
+            onClick={() => setTab('list')}
+            style={{
+              flex: 1,
+              maxWidth: 180,
+              padding: '12px',
+              border: 'none',
+              background: tab === 'list' ? '#7b9acc' : '#f0f0f0',
+              color: tab === 'list' ? 'white' : '#333',
+              cursor: 'pointer',
+              borderTopRightRadius: '8px',
+              borderBottomRightRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              transition: 'background 0.2s, color 0.2s'
+            }}
+          >
+            瀏覽美好記錄
+          </button>
+        </div>
+        {/* 分頁內容 */}
+        {tab === 'form' && <DiaryForm userProfile={userProfile} />}
+        {tab === 'list' && (
+          <>
+            <hr />
+            <div className="diary-list-title">美好記錄</div>
+            <DiaryList onlyMine={true} />
+          </>
+        )}
       </div>
     );
   }

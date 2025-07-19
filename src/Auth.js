@@ -13,6 +13,7 @@ const Auth = () => {
   const [user, setUser] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
   const [error, setError] = useState("");
+  const [tab, setTab] = useState('list'); // ← 這裡移到最上層
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,7 +69,6 @@ const Auth = () => {
 
   if (user) {
     // 分頁切換狀態
-    const [tab, setTab] = useState('list'); // 預設顯示美好記錄
     return (
       <div style={{ textAlign: "center", marginTop: 40 }}>
         <h2>歡迎，{userProfile?.nickname || "使用者"}！</h2>

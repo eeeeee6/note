@@ -78,7 +78,7 @@ const DiaryForm = ({ userProfile }) => {
           <div key={idx} style={{ marginBottom: 12 }}>
             <input
               type="text"
-              placeholder={`感恩的事情 ${idx + 1}`}
+              placeholder={`讓我微笑 ${idx + 1}`}
               value={gratitude[idx]}
               onChange={e => handleGratitudeChange(idx, e.target.value)}
               required
@@ -87,7 +87,7 @@ const DiaryForm = ({ userProfile }) => {
           </div>
         ))}
         <div style={{ marginBottom: 12 }}>
-          <label>今天的心情：</label>
+          <label>今日能量幾顆星：</label>
           <div>
             {[1,2,3,4,5].map(num => (
               <span
@@ -105,7 +105,7 @@ const DiaryForm = ({ userProfile }) => {
           </div>
         </div>
         <div style={{ marginBottom: 12 }}>
-          <label>上傳照片（可多選）：</label>
+          <label>捕捉美好一刻（可多選）：</label>
           <input 
             type="file" 
             accept="image/*" 

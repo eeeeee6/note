@@ -68,7 +68,7 @@ const DiaryForm = ({ userProfile }) => {
     <div className="diary-form">
       {/* 只顯示暱稱，不顯示 email */}
       {userProfile && (
-        <div style={{ marginBottom: 12, textAlign: 'center', color: '#888' }}>
+        <div style={{ marginBottom: 12, textAlign: 'center', color: '#888', fontSize: 16 }}>
           <div>暱稱：{userProfile.nickname}</div>
         </div>
       )}
@@ -82,12 +82,12 @@ const DiaryForm = ({ userProfile }) => {
               value={gratitude[idx]}
               onChange={e => handleGratitudeChange(idx, e.target.value)}
               required
-              style={{ width: "100%", padding: 8, fontSize: 16 }}
+              style={{ width: "100%", padding: 12, fontSize: 16 }}
             />
           </div>
         ))}
         <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 16 }}>今日能量幾顆星：</label>
+          <label style={{ fontSize: 16, fontWeight: 'bold' }}>今日能量幾顆星：</label>
           <div>
             {[1,2,3,4,5].map(num => (
               <span
@@ -105,7 +105,7 @@ const DiaryForm = ({ userProfile }) => {
           </div>
         </div>
         <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 16 }}>捕捉美好一刻（可多選）：</label>
+          <label style={{ fontSize: 16, fontWeight: 'bold' }}>捕捉美好一刻（可多選）：</label>
           <input 
             type="file" 
             accept="image/*" 
@@ -121,13 +121,13 @@ const DiaryForm = ({ userProfile }) => {
             }}
           />
           {photos.length > 0 && (
-            <div style={{ marginTop: 8, fontSize: '14px', color: '#666' }}>
+            <div style={{ marginTop: 8, fontSize: '16px', color: '#666' }}>
               已選擇 {photos.length} 張照片
             </div>
           )}
         </div>
         <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 16 }}>美好時光內容：</label>
+          <label style={{ fontSize: 16, fontWeight: 'bold' }}>美好時光內容：</label>
           <textarea
             placeholder="請描述這些照片的美好時光內容（可選填）"
             value={photoDesc}
@@ -145,7 +145,7 @@ const DiaryForm = ({ userProfile }) => {
         </div>
         {error && <div style={{ color: "red", marginBottom: 12, fontSize: 16 }}>{error}</div>}
         {success && <div style={{ color: "green", marginBottom: 12, fontSize: 16 }}>{success}</div>}
-        <button type="submit" style={{ width: "100%", padding: 8, fontSize: 16 }} disabled={uploading}>
+        <button type="submit" style={{ width: "100%", padding: 12, fontSize: 16, fontWeight: 'bold' }} disabled={uploading}>
           {uploading ? "儲存中..." : "儲存日記"}
         </button>
       </form>

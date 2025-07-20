@@ -113,8 +113,8 @@ const DiaryForm = ({ userProfile }) => {
             onChange={handlePhotoChange} 
             style={{ 
               width: "100%", 
-              padding: "12px", 
-              fontSize: "16px",
+              padding: "16px", 
+              fontSize: "18px",
               border: "2px dashed #ccc",
               borderRadius: "8px",
               cursor: "pointer"
@@ -145,7 +145,7 @@ const DiaryForm = ({ userProfile }) => {
         </div>
         {error && <div style={{ color: "red", marginBottom: 12, fontSize: 16 }}>{error}</div>}
         {success && <div style={{ color: "green", marginBottom: 12, fontSize: 16 }}>{success}</div>}
-        <button type="submit" style={{ width: "100%", padding: 12, fontSize: 16, fontWeight: 'bold' }} disabled={uploading}>
+        <button type="submit" style={{ width: "100%", padding: 16, fontSize: 18, fontWeight: 'bold' }} disabled={uploading}>
           {uploading ? "儲存中..." : "儲存日記"}
         </button>
       </form>

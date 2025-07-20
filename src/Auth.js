@@ -88,7 +88,7 @@ const Auth = () => {
               cursor: 'pointer',
               borderTopLeftRadius: '8px',
               borderBottomLeftRadius: '8px',
-              fontSize: '16px',
+              fontSize: '18px',
               fontWeight: 'bold',
               transition: 'background 0.2s, color 0.2s'
             }}
@@ -107,7 +107,7 @@ const Auth = () => {
               cursor: 'pointer',
               borderTopRightRadius: '8px',
               borderBottomRightRadius: '8px',
-              fontSize: '16px',
+              fontSize: '18px',
               fontWeight: 'bold',
               transition: 'background 0.2s, color 0.2s'
             }}

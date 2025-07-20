@@ -65,89 +65,93 @@ const DiaryForm = ({ userProfile }) => {
   };
 
   return (
-    <div className="diary-form">
+    <div className="diary-form" style={{ maxWidth: '100%', padding: '16px', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* 只顯示暱稱，不顯示 email */}
       {userProfile && (
         <div style={{ marginBottom: 12, textAlign: 'center', color: '#888', fontSize: 16 }}>
           <div>暱稱：{userProfile.nickname}</div>
         </div>
       )}
-      <h2>新增今日之美</h2>
-      <form onSubmit={handleSubmit}>
-        {[0, 1, 2].map((idx) => (
-          <div key={idx} style={{ marginBottom: 12 }}>
-            <input
-              type="text"
-              placeholder={`讓我微笑 ${idx + 1}`}
-              value={gratitude[idx]}
-              onChange={e => handleGratitudeChange(idx, e.target.value)}
-              required
-              style={{ width: "100%", padding: 12, fontSize: 16 }}
+      <h2 style={{ marginBottom: '20px' }}>新增今日之美</h2>
+      <form onSubmit={handleSubmit} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1 }}>
+          {[0, 1, 2].map((idx) => (
+            <div key={idx} style={{ marginBottom: 12 }}>
+              <input
+                type="text"
+                placeholder={`讓我微笑 ${idx + 1}`}
+                value={gratitude[idx]}
+                onChange={e => handleGratitudeChange(idx, e.target.value)}
+                required
+                style={{ width: "100%", padding: 12, fontSize: 16 }}
+              />
+            </div>
+          ))}
+          <div style={{ marginBottom: 12 }}>
+            <label style={{ fontSize: 16, fontWeight: 'bold' }}>今日能量幾顆星：</label>
+            <div>
+              {[1,2,3,4,5].map(num => (
+                <span
+                  key={num}
+                  style={{
+                    fontSize: 28,
+                    cursor: "pointer",
+                    color: num <= stars ? "#FFD700" : "#ccc"
+                  }}
+                  onClick={() => setStars(num)}
+                  role="button"
+                  aria-label={`星星${num}`}
+                >★</span>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginBottom: 12 }}>
+            <label style={{ fontSize: 16, fontWeight: 'bold' }}>捕捉美好一刻（可多選）：</label>
+            <input 
+              type="file" 
+              accept="image/*" 
+              multiple
+              onChange={handlePhotoChange} 
+              style={{ 
+                width: "100%", 
+                padding: "16px", 
+                fontSize: "18px",
+                border: "2px dashed #ccc",
+                borderRadius: "8px",
+                cursor: "pointer"
+              }}
+            />
+            {photos.length > 0 && (
+              <div style={{ marginTop: 8, fontSize: '16px', color: '#666' }}>
+                已選擇 {photos.length} 張照片
+              </div>
+            )}
+          </div>
+          <div style={{ marginBottom: 12 }}>
+            <label style={{ fontSize: 16, fontWeight: 'bold' }}>美好時光內容：</label>
+            <textarea
+              placeholder="請描述這些照片的美好時光內容（可選填）"
+              value={photoDesc}
+              onChange={e => setPhotoDesc(e.target.value)}
+              style={{ 
+                width: "100%", 
+                padding: "12px", 
+                fontSize: "16px",
+                minHeight: "80px",
+                border: "1px solid #e0e0e0",
+                borderRadius: "8px",
+                resize: "vertical"
+              }}
             />
           </div>
-        ))}
-        <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 16, fontWeight: 'bold' }}>今日能量幾顆星：</label>
-          <div>
-            {[1,2,3,4,5].map(num => (
-              <span
-                key={num}
-                style={{
-                  fontSize: 28,
-                  cursor: "pointer",
-                  color: num <= stars ? "#FFD700" : "#ccc"
-                }}
-                onClick={() => setStars(num)}
-                role="button"
-                aria-label={`星星${num}`}
-              >★</span>
-            ))}
-          </div>
+          {error && <div style={{ color: "red", marginBottom: 12, fontSize: 16 }}>{error}</div>}
+          {success && <div style={{ color: "green", marginBottom: 12, fontSize: 16 }}>{success}</div>}
         </div>
-        <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 16, fontWeight: 'bold' }}>捕捉美好一刻（可多選）：</label>
-          <input 
-            type="file" 
-            accept="image/*" 
-            multiple
-            onChange={handlePhotoChange} 
-            style={{ 
-              width: "100%", 
-              padding: "16px", 
-              fontSize: "18px",
-              border: "2px dashed #ccc",
-              borderRadius: "8px",
-              cursor: "pointer"
-            }}
-          />
-          {photos.length > 0 && (
-            <div style={{ marginTop: 8, fontSize: '16px', color: '#666' }}>
-              已選擇 {photos.length} 張照片
-            </div>
-          )}
+        <div style={{ marginTop: 'auto', paddingTop: '20px' }}>
+          <button type="submit" style={{ width: "100%", padding: 16, fontSize: 18, fontWeight: 'bold' }} disabled={uploading}>
+            {uploading ? "儲存中..." : "儲存日記"}
+          </button>
         </div>
-        <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 16, fontWeight: 'bold' }}>美好時光內容：</label>
-          <textarea
-            placeholder="請描述這些照片的美好時光內容（可選填）"
-            value={photoDesc}
-            onChange={e => setPhotoDesc(e.target.value)}
-            style={{ 
-              width: "100%", 
-              padding: "12px", 
-              fontSize: "16px",
-              minHeight: "100px",
-              border: "1px solid #e0e0e0",
-              borderRadius: "8px",
-              resize: "vertical"
-            }}
-          />
-        </div>
-        {error && <div style={{ color: "red", marginBottom: 12, fontSize: 16 }}>{error}</div>}
-        {success && <div style={{ color: "green", marginBottom: 12, fontSize: 16 }}>{success}</div>}
-        <button type="submit" style={{ width: "100%", padding: 16, fontSize: 18, fontWeight: 'bold' }} disabled={uploading}>
-          {uploading ? "儲存中..." : "儲存日記"}
-        </button>
       </form>
     </div>
   );

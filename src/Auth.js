@@ -180,7 +180,7 @@ const Auth = () => {
               value={nickname}
               onChange={e => setNickname(e.target.value)}
               required
-              style={{ width: "100%", padding: 8 }}
+              style={{ width: "100%", padding: 8, fontSize: 16 }}
             />
           </div>
         )}
@@ -191,7 +191,7 @@ const Auth = () => {
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
-            style={{ width: "100%", padding: 8 }}
+            style={{ width: "100%", padding: 8, fontSize: 16 }}
           />
         </div>
         <div style={{ marginBottom: 12 }}>
@@ -201,11 +201,11 @@ const Auth = () => {
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
-            style={{ width: "100%", padding: 8 }}
+            style={{ width: "100%", padding: 8, fontSize: 16 }}
           />
         </div>
         {error && <div style={{ color: "red", marginBottom: 12 }}>{error}</div>}
-        <button type="submit" style={{ width: "100%", padding: 8 }}>
+        <button type="submit" style={{ width: "100%", padding: 8, fontSize: 16 }}>
           {isRegister ? "註冊" : "登入"}
         </button>
       </form>

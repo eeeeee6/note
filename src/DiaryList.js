@@ -71,11 +71,11 @@ const DiaryList = ({ onlyMine = false }) => {
             borderRadius: '8px',
             textAlign: 'center'
           }}>
-            <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>
+            <div style={{ fontSize: '16px', color: '#666', marginBottom: '8px' }}>
               共有 {filteredDiaries.length} 則美好記錄
             </div>
             {filteredDiaries.length > 0 && (
-              <div style={{ fontSize: '14px', color: '#666' }}>
+              <div style={{ fontSize: '16px', color: '#666' }}>
                 記錄期間：{new Date(Math.min(...filteredDiaries.map(d => d.createdAt || 0))).toLocaleDateString()} 至 {new Date(Math.max(...filteredDiaries.map(d => d.createdAt || 0))).toLocaleDateString()}
               </div>
             )}
@@ -87,11 +87,11 @@ const DiaryList = ({ onlyMine = false }) => {
               const currentIdx = photoIndexes[diary.id] || 0;
               return (
                 <div className="diary-card" key={diary.id}>
-                  <h3>今日之美</h3>
+                  <h3 style={{ fontSize: 18 }}>今日之美</h3>
                   {Array.isArray(diary.gratitude)
-                    ? diary.gratitude.filter(Boolean).map((g, i) => <div key={i}>• {g}</div>)
-                    : diary.gratitude}
-                  <div style={{ marginTop: 10 }}>
+                    ? diary.gratitude.filter(Boolean).map((g, i) => <div key={i} style={{ fontSize: 16 }}>• {g}</div>)
+                    : <div style={{ fontSize: 16 }}>{diary.gratitude}</div>}
+                  <div style={{ marginTop: 10, fontSize: 16 }}>
                     <strong>美好時光：</strong>
                     <span>{diary.photoDesc}</span>
                   </div>
@@ -176,12 +176,12 @@ const DiaryList = ({ onlyMine = false }) => {
                       )}
                     </div>
                   )}
-                  <div>心情：{Array(diary.stars).fill('⭐️').join('')}</div>
-                  <div style={{ fontSize: 12, color: "#888" }}>
+                  <div style={{ fontSize: 16 }}>心情：{Array(diary.stars).fill('⭐️').join('')}</div>
+                  <div style={{ fontSize: 14, color: "#888" }}>
                     {diary.createdAt ? new Date(diary.createdAt).toLocaleString() : ""}
                   </div>
                   {auth.currentUser?.uid === diary.userId && (
-                    <button className="delete-btn" onClick={() => handleDelete(diary.id)}>
+                    <button className="delete-btn" onClick={() => handleDelete(diary.id)} style={{ fontSize: 16 }}>
                       刪除
                     </button>
                   )}

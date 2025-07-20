@@ -82,12 +82,12 @@ const DiaryForm = ({ userProfile }) => {
               value={gratitude[idx]}
               onChange={e => handleGratitudeChange(idx, e.target.value)}
               required
-              style={{ width: "100%", padding: 8 }}
+              style={{ width: "100%", padding: 8, fontSize: 16 }}
             />
           </div>
         ))}
         <div style={{ marginBottom: 12 }}>
-          <label>今日能量幾顆星：</label>
+          <label style={{ fontSize: 16 }}>今日能量幾顆星：</label>
           <div>
             {[1,2,3,4,5].map(num => (
               <span
@@ -105,7 +105,7 @@ const DiaryForm = ({ userProfile }) => {
           </div>
         </div>
         <div style={{ marginBottom: 12 }}>
-          <label>捕捉美好一刻（可多選）：</label>
+          <label style={{ fontSize: 16 }}>捕捉美好一刻（可多選）：</label>
           <input 
             type="file" 
             accept="image/*" 
@@ -127,7 +127,7 @@ const DiaryForm = ({ userProfile }) => {
           )}
         </div>
         <div style={{ marginBottom: 12 }}>
-          <label>美好時光內容：</label>
+          <label style={{ fontSize: 16 }}>美好時光內容：</label>
           <textarea
             placeholder="請描述這些照片的美好時光內容（可選填）"
             value={photoDesc}
@@ -143,9 +143,9 @@ const DiaryForm = ({ userProfile }) => {
             }}
           />
         </div>
-        {error && <div style={{ color: "red", marginBottom: 12 }}>{error}</div>}
-        {success && <div style={{ color: "green", marginBottom: 12 }}>{success}</div>}
-        <button type="submit" style={{ width: "100%", padding: 8 }} disabled={uploading}>
+        {error && <div style={{ color: "red", marginBottom: 12, fontSize: 16 }}>{error}</div>}
+        {success && <div style={{ color: "green", marginBottom: 12, fontSize: 16 }}>{success}</div>}
+        <button type="submit" style={{ width: "100%", padding: 8, fontSize: 16 }} disabled={uploading}>
           {uploading ? "儲存中..." : "儲存日記"}
         </button>
       </form>
